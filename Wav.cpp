@@ -41,3 +41,7 @@ Wav::~Wav() {
 int Wav::getBufferSize() const {
     return waveHeader.data_bytes;
 }
+
+int Wav::getBufferBytes() const {
+    return waveHeader.sample_alignment;
+}

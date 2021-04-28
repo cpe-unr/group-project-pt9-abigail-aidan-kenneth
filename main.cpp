@@ -1,6 +1,9 @@
 /** @file */
 #include <iostream>
-#include "wav.h"
+#include "Wav.h"
+#include "Processor.h"
+#include "Echo.h"
+#include "NoiseGate.h"
 
 using namespace std;
 
@@ -13,6 +16,9 @@ int main() {
 
     int choice;
     int choice2;
+
+    Wav wav;
+
     do
     {
         cout << endl << "++==Menu==++" << endl;
@@ -25,23 +31,80 @@ int main() {
         {
             case 1:
                 do{
+                cout << endl << "Choose which audio file you'd like to modify:" << endl;
+                cout << "1. yes-8-bit-mono.wav" << endl;
+                cout << "2. yes-8-bit-stereo.wav" << endl;
+                cout << "3. yes-16-bit-mono.wav" << endl;
+                cout << "4. yes-16-bit-stereo.wav" << endl;
+
+                cin >> choice2;
+                    switch(choice2)
+                    {
+                    case 1:
+                    {
+                        wav.readFile(audiofile1);                        
+                    }
+                    break;
+                    case 2:
+                    {
+                        wav.readFile(audiofile2);
+                    }
+                    break;
+                    case 3:
+                    {
+                        wav.readFile(audiofile3);
+                    }
+                    break;
+                    case 4:
+                    {
+                        wav.readFile(audiofile4);
+                    }
+                    break;
+                    }
+                }while(choice2 != 1,2,3,4,0);
+                do{
                     cout << endl << "**==Process Audio==**" << endl;
                     cout <<"1. Normalization" << endl;
                     cout << "2. Noise Gating" << endl;
                     cout << "3. Echo" << endl;
-                    cout << "4. Done" << endl;
+                    cout << "4. Name Your File" << endl;
                     cout << "0. Back" << endl;
                     cin >> choice2;
                  switch(choice2)
                     {
                         case 1:
                             //*Makes or adds onto an object for normalizing audio*
+                        break;
                         case 2:
-                            //*Makes or adds onto an object for noise gating audio*
+                            {
+                                Processor *processor = new Noise;
+                                processor->processBuffer(wav.getBuffer(),wav.getBufferSize());
+                            }
+                        break;
                         case 3:
-                            //*Makes or adds onto an object for echoing audio*
+                            {
+                                Processor *processor = new Echo(7000);
+                                processor->processBuffer(wav.getBuffer(),wav.getBufferSize());
+                            }
+                        break;
                         case 4:
                             //*Prompts user for filename, the filename can't be the same as the base audio.
+                            {
+                                string end = ".wav";
+                                cout << endl << "Name your new audio file: ";
+                                string s;
+                                cin >> s;
+                                s.append(end);
+                                if(s == audiofile1)
+                                {
+                                    cout << "Please enter a unique file name." << endl;
+                                    break;
+                                }else{
+                                    wav.writeFile(s);                                    
+                                }
+
+                            }
+                        break;
                         case 0:
                             //*Returns you to the Menu.
                         break;           
@@ -57,7 +120,7 @@ int main() {
         }
 
     } while (choice != 0);
-    
+
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }
