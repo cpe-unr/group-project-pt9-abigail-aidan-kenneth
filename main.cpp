@@ -74,11 +74,20 @@ int main() {
                     {
                         case 1:
                             //*Makes or adds onto an object for normalizing audio*
+                            cout << wav.getBitDepth() << endl;
                         break;
                         case 2:
                             {
-                                Processor *processor = new Noise;
-                                processor->processBuffer(wav.getBuffer(),wav.getBufferSize());
+                                if(wav.getBitDepth() == 8)
+                                {
+                                    Processor *processor = new Noise;
+                                    processor->processBuffer(wav.getBuffer(),wav.getBufferSize());                                    
+                                }else
+                                {
+                                    Processor *processor = new Noise;
+                                    processor->shortProcessBuffer(wav.getShortBuffer(),wav.getBufferSize());
+                                }
+
                             }
                         break;
                         case 3:
@@ -110,10 +119,13 @@ int main() {
                         break;           
                     }
                 }while(choice2 != 0);
+            break;
             case 2:
                 //*Will modify metadata, if it exists it will over write it.
+            break;
             case 3:
                 //*Lists audio files, displays metadata, whether it's mono or stereo, 8 or 16 bit and any other interesting things in the audio.
+            break;
             case 0:
                 //*Ends Program
             break;

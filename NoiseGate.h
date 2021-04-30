@@ -15,6 +15,7 @@ class Noise : public Processor
     public:
     int noiseGate();
     void processBuffer(unsigned char* buffer, int bufferSize);
+    void shortProcessBuffer(short* shortBuffer, int bufferSize);
 };
 
 #endif

@@ -15,6 +15,14 @@ void Echo::processBuffer(unsigned char* buffer, int bufferSize)
     }
 }
 
+void Echo::shortProcessBuffer(short* shortBuffer, int bufferSize)
+{
+    for(int i = 0; i < bufferSize/2; i++)
+    {
+        shortBuffer[i] = shortBuffer[i]*0.5 + shortBuffer[i-getDelay()]*0.5;
+    }
+}
+
 Echo::Echo()
 {
     delay = 0;

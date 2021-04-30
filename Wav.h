@@ -14,14 +14,17 @@ public:
     void writeFile(const std::string &outFileName);
 private:
     unsigned char* buffer = NULL;
+    short* shortBuffer = NULL;
     wav_header waveHeader;
 public:
     virtual ~Wav();
 
 public:
     unsigned char *getBuffer();
+    short *getShortBuffer();
     int getBufferSize() const;
     int getBufferBytes() const;
+    int getBitDepth() const;
 };
 
 

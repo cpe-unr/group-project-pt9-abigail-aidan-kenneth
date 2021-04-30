@@ -19,6 +19,7 @@ public:
     ~Echo();
     int getDelay();
     void processBuffer(unsigned char* buffer, int bufferSize);
+    void shortProcessBuffer(short* shortBuffer, int bufferSize);
 };
 
 #endif

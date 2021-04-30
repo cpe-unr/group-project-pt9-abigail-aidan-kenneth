@@ -42,8 +42,7 @@ typedef struct wav_header {
     // char bytes[]; // Remainder of wave file is bytes
 
     /*
-        Metadata comes after this point.
-    */
-   
+        Metadata comes after this point
+   */
 } wav_header;
 #endif //WAVEHEADER_H
