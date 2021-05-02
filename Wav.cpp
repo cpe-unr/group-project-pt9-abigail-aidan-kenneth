@@ -31,10 +31,13 @@ void Wav::readFile(const std::string &fileName) {
 
 
 unsigned char *Wav::getBuffer(){
+    //Buffer for 8 mono/stereo
     return buffer;
 }
 
 short *Wav::getShortBuffer(){
+    //Buffer for 16 mono/stereo 
+    // THIS COULD BE WRONG AND PROBABLY NEEDS TO BE CHANGED.
     return shortBuffer;
 }
 
@@ -51,14 +54,35 @@ Wav::~Wav() {
 }
 
 int Wav::getBufferSize() const {
+    //Size of the buffer
     return waveHeader.data_bytes;
 }
 
 int Wav::getBufferBytes() const {
+    //Tells us sample alignment 
     return waveHeader.sample_alignment;
+}
+
+int Wav::getSampleRate() const
+{
+    //Tells us audio's sample rate
+    return waveHeader.sample_rate;
 }
 
 int Wav::getBitDepth() const
 {
+    //Tells us if the audio is 8 or 16 bit
     return waveHeader.bit_depth;
+}
+
+int Wav::getChannels() const
+{
+    //Tells us number of channels Mono(one) or Stereo(Two)
+    return waveHeader.num_channels;
+}
+
+int Wav::getAudioFormat() const
+{
+    //Tells us about the audio format PCM or IEEE
+    return waveHeader.audio_format;
 }

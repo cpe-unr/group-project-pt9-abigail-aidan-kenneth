@@ -46,18 +46,18 @@ typedef struct wav_header {
     int data_bytes; // Number of bytes in data. Number of samples * num_channels * sample byte size
     // char bytes[]; // Remainder of wave file is bytes
 
-    /*
-        Metadata comes after this point
+} wav_header;
 
+/*
 // #pragma pack(push,2) 
 typedef struct Header_WAV
 {
-    // public:
-        /* RIFF Chunk Descriptor */
+     public:
+        // RIFF Chunk Descriptor 
         uint8_t         RIFF[4];        // RIFF Header Magic header 
         uint32_t        ChunkSize;      // RIFF Chunk Size
         uint8_t         WAVE[4];        // WAVE Header
-        /* "fmt" sub-chunk */
+        // "fmt" sub-chunk 
         uint8_t         fmt[4];         // FMT header
         uint32_t        Subchunk1Size;  // Size of the fmt chunk
         uint16_t        AudioFormat;    // Audio format 1=PCM,6=mulaw,7=alaw,     257=IBM Mu-Law, 258=IBM A-Law, 259=ADPCM
@@ -66,11 +66,13 @@ typedef struct Header_WAV
         uint32_t        bytesPerSec;    // bytes per second
         uint16_t        blockAlign;     // 2=16-bit mono, 4=16-bit stereo
         uint16_t        bitsPerSample;  // Number of bits per sample
-        /* "data" sub-chunk */
+        // "data" sub-chunk 
         uint8_t         Subchunk2ID[4]; // "data"  string
         uint32_t        Subchunk2Size;  // Sampled data length
-//} Header_WAV;
 
-   */
-} wav_header;
-#endif //WAVEHEADER_H
+} Header_WAV;
+*/
+
+
+
+#endif 
