@@ -50,15 +50,71 @@
  
                         myFile << t<< endl;
  
-                    }
+                 }
  
  
  
         }
  
     cout << " Number of frames in the input wave file are " <<count << endl;
+/*
+int metadata(int argc, char * argv[]) 
+{
  
- 
+    if (argc != 2) 
+    {
+        cerr << "Usage: ./program file.wav\n";
+        exit(1);
+    } 
+    const string directory_path = string(argv[1]);
+
+
+
+    std::vector <WAV*> wav_vec;
+    for(const auto & entry : fs::directory_iterator(directory_path)) 
+    {
+
+        FILE * file;
+        string filepath = entry.path().string();
+        file = fopen(filepath.c_str(), "rb");
+        if (file == nullptr) 
+	{
+            std::cerr << "Unable to open file path: " << filepath << '\n';
+            exit(1);
+        }
+
+        size_t bytes_read = 0;
+    
+        WAV* waveptr = new WAV;
+
+
+        bytes_read = fread(&waveptr->Riff, 1, sizeof(RIFF_Chunk), file);
+        bytes_read = fread(&waveptr->Fmt, 1, sizeof(FMT_Chunk), file);
+
+
+        char label[4] = "BAD";
+        bytes_read = fread(&label, 1, sizeof(label), file);
+        uint32_t label_size = -1;
+        bytes_read = fread(&label_size, 1, sizeof(label_size), file);
+
+
+        if (string(label) == "data") 
+	{
+            waveptr->Data.data = new uint8_t[label_size];
+            bytes_read = fread(waveptr->Data.data,sizeof(uint8_t), label_size, file);
+            
+          
+        } else if (string(label) == "info") 
+	{
+
+        }
+
+        wav_vec.push_back(waveptr);
+        fclose(file);
+     } 
+}
+*/
+
 /
 return 0;
 }

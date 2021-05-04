@@ -13,4 +13,27 @@ typedef struct meta_data {
 
 } meta_data;
 
+struct RIFF_Chunk
+{
+    char RIFF[4];
+    int ChunkSize;
+    char WAVE[4];
+};
+
+struct Data_Chunk
+{
+    char label[4]; 
+    int size; 
+    char* data;
+};
+
+struct Meta_Chunk
+{
+    char label[4];
+    int MetaChunkSize;
+    char* chunk_info;
+};
+
+
+
 #endif
