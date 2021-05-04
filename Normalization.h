@@ -1,10 +1,16 @@
+//Team 9
+//Normalizing wav files
+//04/25/2021
+//Normalization.h
+
+
 #ifndef NORMALIZATION_H
 #define NORMALIZATION_H
 
 #include <iostream> 
-#include "Processor.h"
+#include "IProcessor.h"
 
-class Normalize : public Processor
+class Normalize : public IProcessor
 {
     public:
 

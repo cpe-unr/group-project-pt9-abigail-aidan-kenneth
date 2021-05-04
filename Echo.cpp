@@ -1,6 +1,6 @@
-//Kenneth Peterson
-//Messing with wav files(Programming assignment 3)
-//03/23/2021
+//Team 9
+//Making wav files Echo
+//04/25/2021
 //Echo.cpp
 
 #include "Echo.h"

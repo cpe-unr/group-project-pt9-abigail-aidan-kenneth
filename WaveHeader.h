@@ -1,3 +1,8 @@
+//Team 9
+//Aspects/attributes of a wave file
+//04/25/2021
+//WaveHeader.h
+
 #ifndef WAVEHEADER_H
 #define WAVEHEADER_H
 

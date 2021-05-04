@@ -1,3 +1,8 @@
+// Team 9
+// Reading wav files(using templates)
+// 04/26/2021
+// Wav.cpp
+
 /*
     Currently, this only reads in PCM 8-bit mono wavfiles
     This needs further modification to read in stereo files
@@ -7,27 +12,6 @@
 #include <fstream>
 #include <iostream>
 #include "Wav.h"
-
-
-
-void Wav::readFile(const std::string &fileName) {
-    std::ifstream file(fileName,std::ios::binary | std::ios::in);
-    if(file.is_open()){
-        file.read((char*)&waveHeader, sizeof(wav_header));
-        if(waveHeader.bit_depth == 8)
-        {
-            buffer = new unsigned char[waveHeader.data_bytes];
-            file.read((char*)buffer, waveHeader.data_bytes);            
-        }else if(waveHeader.bit_depth == 16)
-        {
-            buffer = new unsigned char[waveHeader.data_bytes];
-            file.read((char*)buffer, waveHeader.data_bytes); 
-            short* shortBuffer = reinterpret_cast<short*>(buffer);
-        }
-        file.close();
-    }
-}
-
 
 unsigned char *Wav::getBuffer(){
     //Buffer for 8 mono/stereo
@@ -40,16 +24,11 @@ short *Wav::getShortBuffer(){
     return shortBuffer;
 }
 
-void Wav::writeFile(const std::string &outFileName) {
-    std::ofstream outFile(outFileName, std::ios::out | std::ios::binary);
-    outFile.write((char*)&waveHeader,sizeof(wav_header));
-    outFile.write((char*)buffer, waveHeader.data_bytes);
-    outFile.close();
-}
-
 Wav::~Wav() {
     if(buffer != NULL)
         delete[] buffer;
+    if(shortBuffer != NULL)
+        delete[] shortBuffer;
 }
 
 int Wav::getBufferSize() const {
@@ -59,7 +38,7 @@ int Wav::getBufferSize() const {
 
 int Wav::getBufferBytes() const {
     //Tells us sample alignment 
-    return waveHeader.sample_alignment;
+    return waveHeader.byte_rate;
 }
 
 int Wav::getSampleRate() const
@@ -84,4 +63,9 @@ int Wav::getAudioFormat() const
 {
     //Tells us about the audio format PCM or IEEE
     return waveHeader.audio_format;
+}
+
+int Wav::getDataSize() const
+{
+    return waveHeader.wav_size;
 }

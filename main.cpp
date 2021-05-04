@@ -1,7 +1,11 @@
-/** @file */
+//Team 9 
+//Reading in audio files, extracting their metadata and creating CSV files
+//04/24/2021
+//main.cpp
+
 #include <iostream>
 #include "Wav.h"
-#include "Processor.h"
+#include "IProcessor.h"
 #include "Echo.h"
 #include "NoiseGate.h"
 #include "Normalization.h"
@@ -44,22 +48,22 @@ int main() {
                     {
                     case 1:
                     {
-                        wav.readFile(audiofile1);                        
+                        wav.readFile<char*>(audiofile1);                        
                     }
                     break;
                     case 2:
                     {
-                        wav.readFile(audiofile2);
+                        wav.readFile<char*>(audiofile2);
                     }
                     break;
                     case 3:
                     {
-                        wav.readFile(audiofile3);
+                        wav.readFile<char*>(audiofile3);
                     }
                     break;
                     case 4:
                     {
-                        wav.readFile(audiofile4);
+                        wav.readFile<char*>(audiofile4);
                     }
                     break;
                     }
@@ -78,11 +82,11 @@ int main() {
                             {
                                 if(wav.getBitDepth() == 8)
                                 {
-                                    Processor *processor = new Normalize;
+                                    IProcessor *processor = new Normalize;
                                     processor->processBuffer(wav.getBuffer(),wav.getBufferSize());                                    
                                 }else
                                 {
-                                    Processor *processor = new Normalize;
+                                    IProcessor *processor = new Normalize;
                                     processor->shortProcessBuffer(wav.getShortBuffer(),wav.getBufferSize());
                                 }
 
@@ -92,11 +96,11 @@ int main() {
                             {
                                 if(wav.getBitDepth() == 8)
                                 {
-                                    Processor *processor = new Noise;
+                                    IProcessor *processor = new Noise;
                                     processor->processBuffer(wav.getBuffer(),wav.getBufferSize());                                    
                                 }else
                                 {
-                                    Processor *processor = new Noise;
+                                    IProcessor *processor = new Noise;
                                     processor->shortProcessBuffer(wav.getShortBuffer(),wav.getBufferSize());
                                 }
 
@@ -106,11 +110,11 @@ int main() {
                             {
                                 if(wav.getBitDepth() == 8)
                                 {
-                                    Processor *processor = new Echo(7000);
+                                    IProcessor *processor = new Echo(7000);
                                     processor->processBuffer(wav.getBuffer(),wav.getBufferSize());
                                 }else
                                 {
-                                    Processor *processor = new Echo(7000);
+                                    IProcessor *processor = new Echo(7000);
                                     processor->processBuffer(wav.getBuffer(),wav.getBufferSize());
                                 }
                             }
@@ -128,7 +132,13 @@ int main() {
                                     cout << "Please enter a unique file name." << endl;
                                     break;
                                 }else{
-                                    wav.writeFile(s);                                    
+                                    if(wav.getBitDepth() == 8){
+                                        wav.writeFile<char*>(s);
+                                    }else if(wav.getBitDepth() == 16)
+                                    {
+                                        wav.writeFile<char*>(s);
+                                    }
+                                  
                                 }
 
                             }
@@ -152,10 +162,10 @@ int main() {
                     //String for the name of the file
                     string n;
                     //Reads in audio files to pass into CSV constructor to write to the file we're creating
-                    wav.readFile(audiofile1);
-                    wav2.readFile(audiofile2);
-                    wav3.readFile(audiofile3);
-                    wav4.readFile(audiofile4);
+                    wav.readFile<char*>(audiofile1);
+                    wav2.readFile<char*>(audiofile2);
+                    wav3.readFile<char*>(audiofile3);
+                    wav4.readFile<char*>(audiofile4);
 
                     cout << endl << "Name of CSV file: " << endl;
                     cin >> n; //File name
@@ -172,32 +182,5 @@ int main() {
         }
 
     } while (choice != 0);
-
-    std::cout << "Hello, World!" << std::endl;
     return 0;
-}
-
-
-/**
- * \brief   The function bar.
- *
- * \details This function does something which is doing nothing. So this text
- *          is totally senseless and you really do not need to read this,
- *          because this text is basically saying nothing.
- *
- * \note    This text shall only show you, how such a \"note\" section
- *          is looking. There is nothing which really needs your notice,
- *          so you do not really need to read this section.
- *
- * \param[in]     a    Description of parameter a.
- * \param[out]    b    Description of the parameter b.
- * \param[in,out] c    Description of the parameter c.
- *
- * \return        The error return code of the function.
- *
- * \retval        ERR_SUCCESS    The function is successfully executed
- * \retval        ERR_FAILURE    An error occurred
- */
-void fn(){
-
 }

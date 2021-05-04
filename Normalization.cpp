@@ -1,5 +1,5 @@
-//Team 9: Kenneth Peterson
-//Normalizing Audio
+//Team 9
+//Normalizing wave files
 //04/30/2021
 //Normalization.cpp
 

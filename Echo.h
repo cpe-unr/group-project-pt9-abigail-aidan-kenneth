@@ -1,15 +1,15 @@
-//Kenneth Peterson
-//Messing with wav files(Programming assignment 3)
-//03/23/2021
+//Team 9
+//Making wav files Echo
+//04/25/2021
 //Echo.h
 
 #ifndef ECHO_H
 #define ECHO_H
 
 #include <iostream> 
-#include "Processor.h"
+#include "IProcessor.h"
 
-class Echo : public Processor
+class Echo : public IProcessor
 {
 private:
     int delay;
