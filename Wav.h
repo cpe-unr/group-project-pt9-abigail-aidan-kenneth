@@ -15,8 +15,6 @@ public:
 private:
     unsigned char* buffer = NULL;
     short* shortBuffer = NULL;
-    wav_header waveHeader;
-    meta_data metaData;
 public:
     virtual ~Wav();
 

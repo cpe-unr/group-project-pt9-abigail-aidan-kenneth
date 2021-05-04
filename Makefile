@@ -21,5 +21,9 @@ normalization.o: Normalization.cpp Normalization.h
 
 csv.o: CSV.cpp CSV.h
 	g++ -c -std=c++11 CSV.cpp
+
+MetaData.o: MetaData.cpp MetaData.h
+	g++ -c -std=c++11 MetaData.cpp
+
 clean:
 	rm *.o audio
